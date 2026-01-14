@@ -39,23 +39,27 @@
 
 ## 🚀 快速开始
 
-### 方法1：本地服务器（推荐）
+### 在线使用（推荐）
+
+直接访问网站：https://xuanshangbiao.com
+
+无需安装，直接在浏览器中打开即可使用所有功能。
+
+### 本地部署
 
 ```bash
 # 克隆仓库
 git clone https://github.com/tonyzhaogc/xuanshangbiao.git
 cd xuanshangbiao
 
-# 启动本地服务器
+# 方法1：启动本地服务器
 python3 -m http.server 8000
 
-# 在浏览器中打开
-# http://localhost:8000
+# 方法2：直接打开
+# 直接用浏览器打开 index.html 文件
 ```
 
-### 方法2：直接打开
-
-直接用浏览器打开 `index.html` 文件即可使用。
+然后在浏览器中打开 http://localhost:8000 即可使用。
 
 ## 📖 使用指南
 

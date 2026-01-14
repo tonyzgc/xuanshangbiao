@@ -79,4 +79,5 @@
 
 ## 访问地址
 
-http://localhost:8000
+- **在线使用**：https://xuanshangbiao.com
+- **本地部署**：http://localhost:8000（使用 python3 -m http.server 8000 启动）

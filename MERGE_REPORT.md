@@ -65,7 +65,8 @@
 
 ### 网站兼容
 - 网站代码无需修改，自动支持合并后的数据格式
-- 访问 http://localhost:8000 即可查看
+- 在线访问：https://xuanshangbiao.com
+- 本地部署：http://localhost:8000（使用 python3 -m http.server 8000 启动）
 
 ## 导出功能
 导出CSV文件时，合并后的商品会显示完整的名称（包含所有别名），例如：
