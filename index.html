@@ -8,6 +8,38 @@
     <link rel="icon" href="https://avatars.githubusercontent.com/u/22577203?v=4">
     <style>
         :root {
+            /* 间距系统 - 统一设计令牌 */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+
+            /* 字体系统 */
+            --text-xs: 0.75rem;
+            --text-sm: 0.8125rem;
+            --text-base: 0.875rem;
+            --text-lg: 1rem;
+            --text-xl: 1.125rem;
+            --text-2xl: 1.75rem;
+
+            /* 圆角系统 */
+            --radius-sm: 0.25rem;
+            --radius: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-full: 9999px;
+
+            /* 阴影系统 */
+            --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+            /* 原有配色保持不变 */
             --primary-color: #4a5568;
             --primary-light: #718096;
             --primary-dark: #2d3748;
@@ -17,9 +49,10 @@
             --border-color: #e2e8f0;
             --text-primary: #1a202c;
             --text-secondary: #718096;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --radius: 8px;
+
+            /* 动画 */
+            --transition-fast: 150ms ease-in-out;
+            --transition-normal: 200ms ease-in-out;
         }
 
         * {
@@ -36,7 +69,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: var(--space-6);
         }
 
         .container {
@@ -52,11 +85,16 @@
 
         /* 页面标题 */
         .page-header {
-            padding: 20px;
+            padding: var(--space-5) var(--space-6);
             background: var(--primary-dark);
             color: white;
             text-align: center;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom:1px solid var(--border-color);
+        }
+
+        .page-header h1 {
+            font-size: var(--text-2xl);
+            font-weight: 600;
         }
 
         .page-header h1 {
@@ -66,9 +104,62 @@
 
         /* 顶部大类选择区域 */
         .top-section {
-            padding: 16px 20px;
+            padding: var(--space-4) var(--space-6);
             background: var(--bg-white);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom:1px solid var(--border-color);
+        }
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px,1fr));
+            gap: var(--space-2);
+            padding: var(--space-1);
+        }
+
+        .class-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-2) var(--space-1);
+            background: var(--bg-light);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            font-size: var(--text-xs);
+        }
+
+        .class-item:hover {
+            background: var(--primary-light);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .class-item.selected {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-dark);
+            box-shadow: var(--shadow-md);
+        }
+
+        .class-item .class-id {
+            font-size: var(--text-base);
+            font-weight: 700;
+            margin-bottom: var(--space-1);
+        }
+
+        .class-item .class-name {
+            font-size: var(--text-xs);
+            opacity: 0.9;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 100%;
+            line-height: 1.2;
         }
 
         .class-grid {
@@ -138,16 +229,16 @@
         }
 
         .left-panel-header {
-            padding: 14px 20px;
+            padding: var(--space-4) var(--space-6);
             background: var(--bg-light);
             border-bottom: 1px solid var(--border-color);
         }
 
         .left-panel-header h2 {
-            font-size: 15px;
+            font-size: var(--text-base);
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 10px;
+            margin-bottom: var(--space-3);
         }
 
         .left-panel-content {
@@ -161,32 +252,34 @@
             width: 280px;
             overflow-y: auto;
             border-right: 1px solid var(--border-color);
-            padding: 12px 0;
+            padding: var(--space-3) 0;
         }
 
         .group-list-item {
             display: flex;
             align-items: center;
-            padding: 10px 16px;
+            padding: var(--space-3) var(--space-4);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all var(--transition-normal);
             border-bottom: 1px solid var(--border-color);
         }
 
         .group-list-item:hover {
             background: var(--bg-light);
+            transform: translateX(4px);
         }
 
         .group-list-item.active {
             background: var(--primary-color);
             color: white;
+            box-shadow: var(--shadow);
         }
 
         .group-list-item .group-id {
-            font-size: 14px;
+            font-size: var(--text-base);
             font-weight: 600;
             color: var(--primary-color);
-            margin-right: 10px;
+            margin-right: var(--space-3);
             min-width: 50px;
         }
 
@@ -196,7 +289,7 @@
 
         .group-list-item .group-name {
             flex: 1;
-            font-size: 13px;
+            font-size: var(--text-sm);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -211,7 +304,7 @@
         }
 
         .items-list-header {
-            padding: 14px 20px;
+            padding: var(--space-4) var(--space-6);
             background: var(--bg-light);
             border-bottom: 1px solid var(--border-color);
             display: flex;
@@ -220,39 +313,41 @@
         }
 
         .items-list-header h3 {
-            font-size: 14px;
+            font-size: var(--text-sm);
             font-weight: 600;
             color: var(--text-primary);
         }
 
         .search-box input {
-            padding: 6px 10px;
+            padding: var(--space-2) var(--space-3);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 13px;
+            border-radius: var(--radius);
+            font-size: var(--text-sm);
             width: 180px;
+            transition: all var(--transition-fast);
         }
 
         .search-box input:focus {
             outline: none;
             border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 85, 104, 0.1);
         }
 
         .items-list-content {
             flex: 1;
             overflow-y: auto;
-            padding: 12px 20px;
+            padding: var(--space-3) var(--space-6);
         }
 
         .items-list-content .item-row {
             display: flex;
             align-items: flex-start;
-            padding: 10px 14px;
+            padding: var(--space-3) var(--space-4);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            margin-bottom: 8px;
+            border-radius: var(--radius);
+            margin-bottom: var(--space-2);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all var(--transition-normal);
             background: var(--bg-white);
         }
 
@@ -260,25 +355,28 @@
             background: var(--primary-light);
             color: white;
             border-color: var(--primary-color);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
         }
 
         .item-row.selected {
             background: var(--primary-color);
             color: white;
             border-color: var(--primary-dark);
+            box-shadow: var(--shadow);
         }
 
         .item-row .item-checkbox {
             width: 18px;
             height: 18px;
             border: 2px solid var(--border-color);
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            margin-right: var(--space-3);
             flex-shrink: 0;
-            margin-top: 2px;
+            margin-top: var(--space-1);
         }
 
         .item-row.selected .item-checkbox {
@@ -301,28 +399,28 @@
         .item-row .item-header {
             display: flex;
             align-items: center;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-1);
         }
 
         .item-row .item-id {
-            font-size: 13px;
+            font-size: var(--text-sm);
             font-weight: 600;
-            margin-right: 8px;
+            margin-right: var(--space-2);
             flex-shrink: 0;
         }
 
         .item-row .item-name {
-            font-size: 13px;
+            font-size: var(--text-sm);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
 
         .item-row .item-remark {
-            font-size: 12px;
+            font-size: var(--text-xs);
             color: var(--text-secondary);
             line-height: 1.4;
-            margin-top: 4px;
+            margin-top: var(--space-1);
         }
 
         .item-row.selected .item-remark {
@@ -339,46 +437,55 @@
         }
 
         .right-panel-header {
-            padding: 14px 16px;
+            padding: var(--space-4) var(--space-4);
             background: var(--primary-dark);
             color: white;
         }
 
         .right-panel-header h2 {
-            font-size: 15px;
+            font-size: var(--text-base);
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: var(--space-3);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: var(--space-2);
         }
 
         .right-panel-header h2 .count {
             background: rgba(255, 255, 255, 0.2);
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 12px;
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
         }
 
         .action-buttons {
             display: flex;
-            gap: 8px;
+            gap: var(--space-2);
         }
 
         .btn {
             flex: 1;
-            padding: 8px 12px;
+            padding: var(--space-2) var(--space-3);
             border: none;
-            border-radius: 6px;
+            border-radius: var(--radius);
             cursor: pointer;
-            font-size: 12px;
+            font-size: var(--text-xs);
             font-weight: 500;
-            transition: all 0.2s;
+            transition: all var(--transition-normal);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: var(--space-2);
             white-space: nowrap;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:active {
+            transform: translateY(0);
         }
 
         .btn-accent {
@@ -411,40 +518,46 @@
         .right-panel-content {
             flex: 1;
             overflow-y: auto;
-            padding: 12px 16px;
+            padding: var(--space-3) var(--space-4);
         }
 
         .class-group {
-            margin-bottom: 16px;
+            margin-bottom: var(--space-4);
         }
 
         .class-group-title {
-            font-size: 13px;
+            font-size: var(--text-sm);
             font-weight: 600;
             color: var(--text-secondary);
-            margin-bottom: 8px;
-            padding-bottom: 6px;
+            margin-bottom: var(--space-2);
+            padding-bottom: var(--space-2);
             border-bottom: 2px solid var(--border-color);
         }
 
         .class-group-title .class-id {
             background: var(--primary-color);
             color: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 11px;
-            margin-right: 6px;
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius-sm);
+            font-size: var(--text-xs);
+            margin-right: var(--space-2);
         }
 
         .selected-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 12px;
+            padding: var(--space-3) var(--space-3);
             background: var(--bg-light);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            margin-bottom: 6px;
+            border-radius: var(--radius);
+            margin-bottom: var(--space-2);
+            transition: all var(--transition-normal);
+        }
+
+        .selected-item:hover {
+            border-color: var(--primary-color);
+            background: #ffffff;
         }
 
         .selected-item .item-info {
@@ -453,14 +566,14 @@
         }
 
         .selected-item .item-code {
-            font-size: 12px;
+            font-size: var(--text-xs);
             font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
 
         .selected-item .item-text {
-            font-size: 12px;
+            font-size: var(--text-xs);
             color: var(--text-secondary);
             overflow: hidden;
             text-overflow: ellipsis;
@@ -472,48 +585,50 @@
             background: #fc8181;
             color: white;
             border: none;
-            border-radius: 4px;
-            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            padding: var(--space-1) var(--space-2);
             cursor: pointer;
-            font-size: 11px;
-            margin-left: 8px;
+            font-size: var(--text-xs);
+            margin-left: var(--space-2);
             flex-shrink: 0;
+            transition: all var(--transition-normal);
         }
 
         .selected-item .item-remove:hover {
             opacity: 0.8;
+            transform: scale(1.05);
         }
 
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
+            padding: var(--space-10) var(--space-6);
             color: var(--text-secondary);
         }
 
         .empty-state i {
             font-size: 48px;
             color: var(--border-color);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-3);
         }
 
         .empty-state h3 {
-            font-size: 16px;
-            margin-bottom: 6px;
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-2);
             color: var(--text-primary);
         }
 
         .empty-state p {
-            font-size: 13px;
+            font-size: var(--text-sm);
             line-height: 1.5;
         }
 
         .group-remark {
-            font-size: 12px;
+            font-size: var(--text-xs);
             color: var(--text-secondary);
-            padding: 8px 12px;
+            padding: var(--space-2) var(--space-3);
             background: var(--bg-light);
-            border-radius: 4px;
-            margin-top: 8px;
+            border-radius: var(--radius-sm);
+            margin-top: var(--space-2);
             line-height: 1.4;
         }
 
@@ -525,21 +640,27 @@
 
         ::-webkit-scrollbar-track {
             background: var(--bg-light);
+            border-radius: var(--radius-full);
         }
 
         ::-webkit-scrollbar-thumb {
             background: var(--border-color);
-            border-radius: 3px;
+            border-radius: var(--radius-full);
+            transition: background var(--transition-fast);
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-light);
         }
 
+        ::-webkit-scrollbar-thumb:active {
+            background: var(--primary-color);
+        }
+
         /* 移动端响应式设计 */
         @media (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: var(--space-3);
             }
 
             .container {
@@ -547,25 +668,25 @@
             }
 
             .page-header h1 {
-                font-size: 20px;
+                font-size: var(--text-xl);
             }
 
             .class-grid {
-                grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-                gap: 4px;
+                grid-template-columns: repeat(auto-fill, minmax(50px,1fr));
+                gap: var(--space-1);
             }
 
             .class-item {
-                padding: 4px 2px;
-                font-size: 10px;
+                padding: var(--space-1) var(--space-1);
+                font-size: var(--text-xs);
             }
 
             .class-item .class-id {
-                font-size: 12px;
+                font-size: var(--text-xs);
             }
 
             .class-item .class-name {
-                font-size: 9px;
+                font-size: 10px;
             }
 
             /* 主体内容改为纵向排列 */
@@ -582,7 +703,7 @@
             }
 
             .left-panel-header h2 {
-                font-size: 14px;
+                font-size: var(--text-sm);
             }
 
             /* 左侧内容改为纵向排列 */
@@ -596,20 +717,20 @@
                 max-height: 200px;
                 border-right: none;
                 border-bottom: 1px solid var(--border-color);
-                padding: 8px 0;
+                padding: var(--space-2) 0;
             }
 
             .group-list-item {
-                padding: 8px 12px;
+                padding: var(--space-2) var(--space-3);
             }
 
             .group-list-item .group-id {
-                font-size: 13px;
+                font-size: var(--text-sm);
                 min-width: 45px;
             }
 
-            .group-list-item .group-name {
-                font-size: 12px;
+             .group-list-item .group-name {
+                font-size: var(--text-xs);
             }
 
             /* 商品列表占满宽度 */
@@ -619,34 +740,34 @@
             }
 
             .items-list-header {
-                padding: 10px 12px;
+                padding: var(--space-3) var(--space-3);
             }
 
             .items-list-header h3 {
-                font-size: 13px;
+                font-size: var(--text-sm);
             }
 
             .search-box input {
                 width: 120px;
-                font-size: 12px;
-                padding: 5px 8px;
+                font-size: var(--text-xs);
+                padding: var(--space-1) var(--space-2);
             }
 
             .items-list-content {
-                padding: 8px 12px;
+                padding: var(--space-2) var(--space-3);
             }
 
             .items-list-content .item-row {
-                padding: 8px 10px;
-                margin-bottom: 6px;
+                padding: var(--space-2) var(--space-3);
+                margin-bottom: var(--space-2);
             }
 
             .items-list-content .item-id {
-                font-size: 12px;
+                font-size: var(--text-xs);
             }
 
             .items-list-content .item-name {
-                font-size: 12px;
+                font-size: var(--text-xs);
             }
 
             .items-list-content .item-remark {
@@ -661,7 +782,7 @@
             }
 
             .right-panel-header h2 {
-                font-size: 14px;
+                font-size: var(--text-sm);
             }
 
             .action-buttons {
