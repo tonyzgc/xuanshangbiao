@@ -1042,7 +1042,11 @@
             if (isSelected(itemId)) {
                 removeItem(itemId);
             } else {
-                selectedItems.push(item);
+                // 添加时间戳
+                selectedItems.push({
+                    ...item,
+                    selectedAt: Date.now()
+                });
             }
 
             updateRightPanel();
@@ -1095,15 +1099,36 @@
                 grouped[classId].push(item);
             });
 
+            // 记录每个大类最新选择时间
+            const classLatestTime = {};
+            Object.keys(grouped).forEach(classId => {
+                const latest = grouped[classId].reduce((a, b) => 
+                    (b.selectedAt || 0) > (a.selectedAt || 0) ? b : a
+                , { selectedAt: 0 });
+                classLatestTime[classId] = latest.selectedAt || 0;
+            });
+
+            // 按大类最新选择时间排序（时间晚的在前）
+            const sortedClassIds = Object.keys(grouped).sort((a, b) => 
+                classLatestTime[b] - classLatestTime[a]
+            );
+
+            // 每个大类内部，按选择时间排序（时间晚的在前）
+            sortedClassIds.forEach(classId => {
+                grouped[classId].sort((a, b) => 
+                    (b.selectedAt || 0) - (a.selectedAt || 0)
+                );
+            });
+
             let html = '';
-            for (const [classId, items] of Object.entries(grouped)) {
+            for (const classId of sortedClassIds) {
                 html += `
                     <div class="class-group">
                         <div class="class-group-title">
                             <span class="class-id">${classId}</span>
-                            ${items.length} 项
+                            ${grouped[classId].length} 项
                         </div>
-                        ${items.map(item => `
+                        ${grouped[classId].map(item => `
                             <div class="selected-item">
                                 <div class="item-info">
                                     <div class="item-code">${item.id}</div>
@@ -1148,7 +1173,19 @@
                 return;
             }
 
-            const text = selectedItems.map(item => `${item.id}\t${item.name}`).join('\n');
+            // 按大类序号和小类序号排序（从小到大）
+            const sortedItems = [...selectedItems].sort((a, b) => {
+                // 先按大类序号排序
+                const aClassId = a.id.slice(0, 2);
+                const bClassId = b.id.slice(0, 2);
+                if (aClassId !== bClassId) {
+                    return aClassId.localeCompare(bClassId, undefined, { numeric: true });
+                }
+                // 大类相同，按商品编码排序
+                return a.id.localeCompare(b.id, undefined, { numeric: true });
+            });
+
+            const text = sortedItems.map(item => `${item.id}\t${item.name}`).join('\n');
             navigator.clipboard.writeText(text).then(() => {
                 showToast('已复制到剪贴板');
             }).catch(() => {
@@ -1162,8 +1199,20 @@
                 return;
             }
 
+            // 按大类序号和小类序号排序（从小到大）
+            const sortedItems = [...selectedItems].sort((a, b) => {
+                // 先按大类序号排序
+                const aClassId = a.id.slice(0, 2);
+                const bClassId = b.id.slice(0, 2);
+                if (aClassId !== bClassId) {
+                    return aClassId.localeCompare(bClassId, undefined, { numeric: true });
+                }
+                // 大类相同，按商品编码排序
+                return a.id.localeCompare(b.id, undefined, { numeric: true });
+            });
+
             let csv = '大类,类似群,商品编码,商品名称,备注\n';
-            selectedItems.forEach(item => {
+            sortedItems.forEach(item => {
                 const classId = item.id.slice(0, 2);
                 const groupId = item.id.slice(0, 4);
                 // 使用逗号分隔，并给包含逗号的字段加引号
