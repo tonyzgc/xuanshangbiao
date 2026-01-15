@@ -49,7 +49,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/tonyzhaogc/xuanshangbiao.git
+git clone https://github.com/tonyzgc/xuanshangbiao.git
 cd xuanshangbiao
 
 # 方法1：启动本地服务器
@@ -218,7 +218,7 @@ python3 scrape_data.py
 
 ## 📧 联系方式
 
-如有问题或建议，欢迎提交 [Issue](https://github.com/tonyzhaogc/xuanshangbiao/issues)
+如有问题或建议，欢迎提交 [Issue](https://github.com/tonyzgc/xuanshangbiao/issues)
 
 ## 🌟 Star History
 
