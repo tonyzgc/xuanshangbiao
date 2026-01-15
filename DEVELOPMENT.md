@@ -3,7 +3,7 @@
 ## 2025-01-15 商标子类选择系统开发
 
 ### 项目信息
-- 仓库地址：https://github.com/tonyzhaogc/xuanshangbiao
+- 仓库地址：https://github.com/tongzgc/xuanshangbiao
 - 在线地址：https://xuanshangbiao.com
 - 开发工具：Opencode & GLM-4.7
 
