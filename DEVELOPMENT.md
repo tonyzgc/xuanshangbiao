@@ -109,6 +109,16 @@ be28c37 Add LICENSE file and update documentation for GitHub Pages deployment
 
 （完整列表见 README.md）
 
+### 问题7：移动端点击大类后不显示商标小类
+- **原因**：缺少响应式设计的媒体查询，移动端布局不正确
+- **修复**：添加完整的移动端响应式设计
+  - 主内容区域改为纵向排列
+  - 左侧面板内容改为纵向排列
+  - 类似群列表改为100%宽度，最大高度200px
+  - 商品列表占满剩余空间
+  - 优化字体大小和间距
+  - 针对小屏幕（480px）进一步优化
+
 ### 后续改进建议
 
 1. **性能优化**
@@ -122,7 +132,7 @@ be28c37 Add LICENSE file and update documentation for GitHub Pages deployment
 
 3. **用户体验**
    - 添加快捷键支持
-   - 优化移动端显示
+   - 优化平板端显示
    - 添加暗黑模式
 
 ### 联系方式
